@@ -1,5 +1,6 @@
 package org.cos.zad1.ui.controller;
 
+import org.cos.zad1.ui.crypt.PermuteTable;
 import org.cos.zad1.ui.view.MainFrame;
 
 import javax.swing.*;
@@ -8,12 +9,14 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainFrameController {
 
-    DefaultListModel<String> listModel;
-    File selectedFile;
-    byte[] fileData;
+    private DefaultListModel<String> listModel;
+    private File selectedFile;
+    private byte[] fileData;
 
     private MainFrame mainFrame;
     private JButton fileButton;
@@ -47,18 +50,12 @@ public class MainFrameController {
         encryptButton = mainFrame.getEncryptButton();
         decryptButton = mainFrame.getDecryptButton();
         progressBar1 = mainFrame.getProgressBar1();
-
-//        progressList = new JList();
-//
-//        mainPanel.add(new JScrollPane(progressList));
+        progressList = mainFrame.getProgressList();
     }
 
-    String getBits(byte b)
-    {
-        String result = "";
+    void getBits(byte b, List list) {
         for(int i = 0; i < 8; i++)
-            result += (b & (1 << i)) == 0 ? "0" : "1";
-        return result;
+            list.add((b & (1 << i)) == 0 ? "0" : "1");
     }
 
     private class EncryptButton implements ActionListener {
@@ -67,7 +64,7 @@ public class MainFrameController {
             for (Integer i = 0; i < 10; ++i) {
                 listModel.addElement("Magic!!!!");
             }
-            //progressList.setModel(listModel);
+            progressList.setModel(listModel);
         }
     }
 
@@ -94,12 +91,16 @@ public class MainFrameController {
                     e1.printStackTrace();
                 }
             }
-            String tmp = "";
+            List<Boolean> tmp2 = new ArrayList<>();
+
             for (byte b : fileData) {
-                tmp += getBits(b);
+                getBits(b, tmp2);
             }
 
-            System.out.println(tmp);
+            System.out.println(tmp2);
+            System.out.println(tmp2.size());
+            PermuteTable permuteTable = new PermuteTable();
+            System.out.println(permuteTable.getFirstPermutationArray()[0]);
         }
     }
 }

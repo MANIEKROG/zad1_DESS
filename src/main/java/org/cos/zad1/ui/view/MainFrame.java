@@ -10,15 +10,17 @@ public class MainFrame extends JFrame {
     private JButton encryptButton;
     private JButton decryptButton;
     private JProgressBar progressBar1;
-
-
     private JList progressList;
-    private JTextArea textArea1;
+    private JTextArea keyInput;
 
     public MainFrame() {
         setSize(800, 600);
         setContentPane(mainPanel);
         setLocationRelativeTo(null);
+    }
+
+    public JTextArea getKeyInput() {
+        return keyInput;
     }
 
     public JList getProgressList() {

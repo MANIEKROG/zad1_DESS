@@ -24,6 +24,7 @@ public class MainFrameController {
     private JButton decryptButton;
     private JProgressBar progressBar1;
     private JList progressList;
+    private JTextArea keyInput;
     private JPanel mainPanel;
 
     public MainFrameController() {
@@ -51,6 +52,7 @@ public class MainFrameController {
         decryptButton = mainFrame.getDecryptButton();
         progressBar1 = mainFrame.getProgressBar1();
         progressList = mainFrame.getProgressList();
+        keyInput = mainFrame.getKeyInput();
     }
 
     void getBits(byte b, List list) {
@@ -101,6 +103,7 @@ public class MainFrameController {
             System.out.println(tmp2.size());
             PermuteTable permuteTable = new PermuteTable();
             System.out.println(permuteTable.getFirstPermutationArray()[0]);
+            System.out.println(keyInput.getText());
         }
     }
 }

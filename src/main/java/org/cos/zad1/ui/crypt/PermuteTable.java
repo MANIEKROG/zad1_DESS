@@ -4,18 +4,44 @@ public final class PermuteTable {
 
     private Integer[] firstPermutationArray;
     private Integer[] endPermutationArray;
+    private Integer[] keyPermutationArray;
+    private Integer[] numberOfShiftsArray;
 
     public PermuteTable() {
         initFirstPermut();
         initEndPermut();
+        initKeyPermutation();
+        initNumnerOFShifts();
     }
 
     public Integer[] getFirstPermutationArray() {
         return firstPermutationArray;
     }
-
     public Integer[] getEndPermutationArray() {
         return endPermutationArray;
+    }
+    public Integer[] getKeyPermutationArray() { return  keyPermutationArray; }
+    public Integer[] getNumberOfShiftsArray() { return numberOfShiftsArray; }
+
+    private void initNumnerOFShifts(){
+        numberOfShiftsArray = new Integer[16];
+
+        numberOfShiftsArray[0] = 1;
+        numberOfShiftsArray[1] = 1;
+        numberOfShiftsArray[2] = 2;
+        numberOfShiftsArray[3] = 2;
+        numberOfShiftsArray[4] = 2;
+        numberOfShiftsArray[5] = 2;
+        numberOfShiftsArray[6] = 2;
+        numberOfShiftsArray[7] = 2;
+        numberOfShiftsArray[8] = 1;
+        numberOfShiftsArray[9] = 2;
+        numberOfShiftsArray[10] = 2;
+        numberOfShiftsArray[11] = 2;
+        numberOfShiftsArray[12] = 2;
+        numberOfShiftsArray[13] = 2;
+        numberOfShiftsArray[14] = 2;
+        numberOfShiftsArray[15] = 1;
     }
 
     private void initFirstPermut() {
@@ -85,6 +111,8 @@ public final class PermuteTable {
         firstPermutationArray[61] = 23;
         firstPermutationArray[62] = 15;
         firstPermutationArray[63] = 7;
+
+        for(int i = 0; i < 64; i++ ) firstPermutationArray[i]--;
     }
 
     private void initEndPermut() {
@@ -154,5 +182,70 @@ public final class PermuteTable {
         endPermutationArray[61] = 17;
         endPermutationArray[62] = 57;
         endPermutationArray[63] = 25;
+
+        for(int i = 0; i < 64; i++ ) endPermutationArray[i]--;
+    }
+
+    public void initKeyPermutation() {
+        keyPermutationArray = new Integer[56];
+
+        keyPermutationArray[0] = 57;
+        keyPermutationArray[1] = 49;
+        keyPermutationArray[2] = 41;
+        keyPermutationArray[3] = 33;
+        keyPermutationArray[4] = 25;
+        keyPermutationArray[5] = 17;
+        keyPermutationArray[6] = 9;
+        keyPermutationArray[7] = 1;
+        keyPermutationArray[8] = 58;
+        keyPermutationArray[9] = 50;
+        keyPermutationArray[10] = 42;
+        keyPermutationArray[11] = 34;
+        keyPermutationArray[12] = 26;
+        keyPermutationArray[13] = 18;
+        keyPermutationArray[14] = 10;
+        keyPermutationArray[15] = 2;
+        keyPermutationArray[16] = 59;
+        keyPermutationArray[17] = 51;
+        keyPermutationArray[18] = 43;
+        keyPermutationArray[19] = 35;
+        keyPermutationArray[20] = 27;
+        keyPermutationArray[21] = 19;
+        keyPermutationArray[22] = 11;
+        keyPermutationArray[23] = 3;
+        keyPermutationArray[24] = 60;
+        keyPermutationArray[25] = 52;
+        keyPermutationArray[26] = 44;
+        keyPermutationArray[27] = 36;
+        keyPermutationArray[28] = 63;
+        keyPermutationArray[29] = 55;
+        keyPermutationArray[30] = 47;
+        keyPermutationArray[31] = 39;
+        keyPermutationArray[32] = 31;
+        keyPermutationArray[33] = 23;
+        keyPermutationArray[34] = 15;
+        keyPermutationArray[35] = 7;
+        keyPermutationArray[36] = 62;
+        keyPermutationArray[37] = 54;
+        keyPermutationArray[38] = 46;
+        keyPermutationArray[39] = 38;
+        keyPermutationArray[40] = 30;
+        keyPermutationArray[41] = 22;
+        keyPermutationArray[42] = 14;
+        keyPermutationArray[43] = 6;
+        keyPermutationArray[44] = 61;
+        keyPermutationArray[45] = 53;
+        keyPermutationArray[46] = 45;
+        keyPermutationArray[47] = 37;
+        keyPermutationArray[48] = 29;
+        keyPermutationArray[49] = 21;
+        keyPermutationArray[50] = 13;
+        keyPermutationArray[51] = 5;
+        keyPermutationArray[52] = 28;
+        keyPermutationArray[53] = 20;
+        keyPermutationArray[54] = 12;
+        keyPermutationArray[55] = 4;
+
+        for(int i = 0; i < 55; i++ ) keyPermutationArray[i]--;
     }
 }

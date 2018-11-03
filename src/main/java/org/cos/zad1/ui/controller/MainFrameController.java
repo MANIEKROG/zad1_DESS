@@ -1,5 +1,6 @@
 package org.cos.zad1.ui.controller;
 
+import org.cos.zad1.ui.crypt.Encrypt;
 import org.cos.zad1.ui.crypt.PermuteTable;
 import org.cos.zad1.ui.view.MainFrame;
 
@@ -17,6 +18,7 @@ public class MainFrameController {
     private DefaultListModel<String> listModel;
     private File selectedFile;
     private byte[] fileData;
+    private static List<Boolean> bitsArray = new ArrayList<>();
 
     private MainFrame mainFrame;
     private JButton fileButton;
@@ -62,11 +64,16 @@ public class MainFrameController {
 
     private class EncryptButton implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            progressBar1.setValue(progressBar1.getValue() + 1);
-            for (Integer i = 0; i < 10; ++i) {
-                listModel.addElement("Magic!!!!");
-            }
-            progressList.setModel(listModel);
+//            progressBar1.setValue(progressBar1.getValue() + 1);
+
+            PermuteTable permutationTables = new PermuteTable();
+            Encrypt encrypt = new Encrypt(bitsArray);
+            encrypt.get64bites();
+            encrypt.doAPermutation(encrypt.getSixtyFourBites(), encrypt.getPermutedSixtyFourBites() , permutationTables.getFirstPermutationArray());
+//            encrypt.devPrintBits(encrypt.getSixtyFourBites(), encrypt.getPermutedSixtyFourBites());
+            encrypt.doAPermutation(encrypt.getUserKey(), encrypt.getPermutedUserKey(), permutationTables.getKeyPermutationArray());
+//            encrypt.devPrintBits(encrypt.getUserKey(), encrypt.getPermutedUserKey());
+            encrypt.splitSixtyFourBitesIntoTwoParts();
         }
     }
 
@@ -79,7 +86,9 @@ public class MainFrameController {
     private class FileButton implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             JFileChooser fileChooser = new JFileChooser();
+
             int returnValue = fileChooser.showOpenDialog(null);
+
             if (returnValue == JFileChooser.APPROVE_OPTION)
             {
                 selectedFile = fileChooser.getSelectedFile();
@@ -93,17 +102,21 @@ public class MainFrameController {
                     e1.printStackTrace();
                 }
             }
+
             List<Boolean> tmp2 = new ArrayList<>();
 
-            for (byte b : fileData) {
-                getBits(b, tmp2);
+            for(byte b : fileData) {
+                getBits(b, bitsArray);
             }
 
-            System.out.println(tmp2);
-            System.out.println(tmp2.size());
-            PermuteTable permuteTable = new PermuteTable();
-            System.out.println(permuteTable.getFirstPermutationArray()[0]);
-            System.out.println(keyInput.getText());
+//            for(Integer i = 0; i < 64; i++) {
+//                System.out.println(bitsArray.get(i));
+//            }
+
+//            System.out.println(tmp2);
+//            PermuteTable permuteTable = new PermuteTable();
+//            System.out.println(permuteTable.getFirstPermutationArray()[0]);
+//            System.out.println(keyInput.getText());
         }
     }
 }
